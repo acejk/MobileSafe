@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
@@ -13,19 +15,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.oscar.mobilesafe.R;
 import com.oscar.mobilesafe.utils.StreamUtils;
+import com.oscar.mobilesafe.utils.ToastUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
     private static final int UPDATE_VERSION = 100;
     private static final int ENTER_HOME = 101;
     private static final int URL_ERROR = 102;
@@ -38,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private Context mContext;
 
     private int mLocalVersionCode;
-    private static String TAG = "MainActivity";
+    private static String TAG = "SplashActivity";
 
     private String mVersionCode;//版本号
     private String mVersionDes;//版本描述
@@ -57,10 +65,13 @@ public class MainActivity extends AppCompatActivity {
                     enterHome();
                     break;
                 case URL_ERROR:
+                    ToastUtil.show(mContext, "url异常");
                     break;
                 case IO_ERROR:
+                    ToastUtil.show(mContext, "读取流异常");
                     break;
                 case JSON_ERROR:
+                    ToastUtil.show(mContext, "json异常");
                     break;
             }
         }
@@ -83,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setIcon(R.mipmap.ic_launcher);
         builder.setTitle("版本更新");
         builder.setMessage(mVersionDes);
+
         builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -100,16 +112,63 @@ public class MainActivity extends AppCompatActivity {
         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-
+                enterHome();
+                dialog.dismiss();
             }
         });
+
+        builder.show();
     }
 
     /**
      * 下载apk
      */
     private void downloadApk() {
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "mobilesafe.apk";
+            HttpUtils httpUtils = new HttpUtils();
+            httpUtils.download(mDownloadUrl, sdcardPath, new RequestCallBack<File>() {
+                @Override
+                public void onSuccess(ResponseInfo<File> responseInfo) {
+                    Log.i(TAG, "下载成功");
+                    File file = responseInfo.result;
+                    installApk(file);
+                }
 
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    Log.i(TAG, "下载失败");
+                }
+
+                @Override
+                public void onStart() {
+                    Log.i(TAG, "刚刚开始下载");
+                }
+
+                @Override
+                public void onLoading(long total, long current, boolean isUploading) {
+                    Log.i(TAG, "正在下载中....");
+                }
+
+            });
+        }
+    }
+
+    /**
+     * 安装apk
+     */
+    private void installApk(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+		intent.setType("application/vnd.android.package-archive");
+        intent.setDataAndType(Uri.fromFile(file),"application/vnd.android.package-archive");
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        enterHome();
     }
 
     @Override
@@ -132,6 +191,9 @@ public class MainActivity extends AppCompatActivity {
         checkVersion();
     }
 
+    /**
+     * 检查版本更新
+     */
     private void checkVersion() {
         final String urlStr = "http://192.168.0.10:8080/version.json";
         final Message msg = Message.obtain();
@@ -193,6 +255,10 @@ public class MainActivity extends AppCompatActivity {
         }.start();
     }
 
+    /**
+     * 获取本地版本号
+     * @return
+     */
     private int getLocalVersionCode() {
         PackageManager pm = getPackageManager();
         try {
@@ -204,6 +270,10 @@ public class MainActivity extends AppCompatActivity {
         return 0;
     }
 
+    /**
+     * 获取版本名
+     * @return
+     */
     private String getVersionName() {
         PackageManager pm = getPackageManager();
         try {
