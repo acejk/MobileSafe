@@ -13,6 +13,8 @@ import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.animation.AlphaAnimation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.HttpUtils;
@@ -42,6 +44,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
     private TextView mTvVersion;
+    private RelativeLayout mRlRoot;
 
     private Context mContext;
 
@@ -175,10 +178,19 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //初始化控件
         initViews();
-
+        //初始化数据
         initDatas();
+        //初始化动画
+        initAnimation();
+    }
+
+    private void initAnimation() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(3000);
+        mRlRoot.startAnimation(alphaAnimation);
+
     }
 
     private void initDatas() {
@@ -287,5 +299,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private void initViews() {
         mTvVersion = (TextView) findViewById(R.id.tv_version);
+        mRlRoot = (RelativeLayout) findViewById(R.id.rl_root);
     }
 }
