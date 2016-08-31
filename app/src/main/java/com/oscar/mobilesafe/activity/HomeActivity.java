@@ -1,8 +1,11 @@
 package com.oscar.mobilesafe.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.oscar.mobilesafe.adapter.GridViewAdapter;
@@ -37,6 +40,15 @@ public class HomeActivity extends AppCompatActivity {
 
         mAdapter = new GridViewAdapter(mContext, mTitles, mIcons);
         mGv.setAdapter(mAdapter);
+
+        //设置单个条目的点击事件
+        mGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(mContext, SettingActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initViews() {
