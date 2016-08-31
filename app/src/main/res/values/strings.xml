@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MobileSafe</string>
     <string name="gongneng">功能列表</string>
+    <string name="setting">设置中心</string>
 </resources>

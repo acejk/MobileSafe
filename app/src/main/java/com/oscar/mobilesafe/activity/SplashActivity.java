@@ -22,6 +22,8 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.oscar.mobilesafe.R;
+import com.oscar.mobilesafe.utils.ConstentValue;
+import com.oscar.mobilesafe.utils.SpUtil;
 import com.oscar.mobilesafe.utils.StreamUtils;
 import com.oscar.mobilesafe.utils.ToastUtil;
 
@@ -199,8 +201,13 @@ public class SplashActivity extends AppCompatActivity {
         mTvVersion.setText("版本名称：" + getVersionName());
 
         mLocalVersionCode = getLocalVersionCode();
+        boolean isUpdate = SpUtil.getBoolean(mContext, ConstentValue.OPEN_UPDATE, false);
+        if(isUpdate) {
+            checkVersion();
+        } else {
+            mHandler.sendEmptyMessageDelayed(ENTER_HOME, 4000);
+        }
 
-        checkVersion();
     }
 
     /**

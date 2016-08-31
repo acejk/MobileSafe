@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:oscar="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,11 @@
     <com.oscar.mobilesafe.view.SettingItemView
         android:id="@+id/setting"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        oscar:destitle="自动更新设置"
+        oscar:deson="自动更新已开启"
+        oscar:desoff="自动更新已关闭"
+        >
     </com.oscar.mobilesafe.view.SettingItemView>
 
 </LinearLayout>

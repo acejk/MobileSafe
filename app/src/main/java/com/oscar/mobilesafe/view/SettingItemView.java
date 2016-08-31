@@ -13,9 +13,14 @@ import com.oscar.mobilesafe.R;
  * Created by Administrator on 2016/8/30 0030.
  */
 public class SettingItemView extends RelativeLayout {
+    private static final String NAMESPACE = "http://schemas.android.com/apk/res-auto";
     private TextView mTvTitle;
     private TextView mTvDes;
     private CheckBox mCb;
+
+    private String mDesTitle;
+    private String mDesOff;
+    private String mDesOn;
 
     public SettingItemView(Context context) {
         this(context, null);
@@ -33,6 +38,14 @@ public class SettingItemView extends RelativeLayout {
         mTvTitle = (TextView) findViewById(R.id.tv_title);
         mTvDes = (TextView) findViewById(R.id.tv_des);
         mCb = (CheckBox) findViewById(R.id.cb);
+
+        initAttrs(attrs);
+    }
+
+    private void initAttrs(AttributeSet attrs) {
+        mDesTitle = attrs.getAttributeValue(NAMESPACE, "destitle");
+        mDesOff = attrs.getAttributeValue(NAMESPACE, "desoff");
+        mDesOn = attrs.getAttributeValue(NAMESPACE, "deson");
     }
 
     /**
@@ -47,9 +60,9 @@ public class SettingItemView extends RelativeLayout {
     public void setCheck(boolean isCheck) {
         mCb.setChecked(isCheck);
         if(isCheck) {
-            mTvDes.setText("自动更新已开启");
+            mTvDes.setText(mDesOn);
         } else {
-            mTvDes.setText("自动更新已关闭");
+            mTvDes.setText(mDesOff);
         }
     }
 
