@@ -42,5 +42,34 @@ public class SpUtil {
         return mSp.getBoolean(key, defValue);
     }
 
+    /**
+     * 写密码到文件中
+     * @param context 上下文环境
+     * @param key 存储节点名称
+     * @param value 存储节点值
+     */
+    public static void putString(Context context, String key, String value) {
+        if(mSp == null) {
+            mSp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        }
+        mEditor = mSp.edit();
+        mEditor.putString(key, value);
+        mEditor.commit();
+    }
+
+    /**
+     * 从文件中读取密码
+     * @param context 上下文环境
+     * @param key 存储节点的名称
+     * @param defValue 没有此节点的默认值
+     * @return 默认值或者此节点读取到的结果
+     */
+    public static String getString(Context context, String key, String defValue) {
+        if(mSp == null) {
+            mSp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        }
+        return mSp.getString(key, defValue);
+    }
+
 
 }

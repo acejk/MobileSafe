@@ -13,12 +13,12 @@ import com.oscar.mobilesafe.R;
  * Created by Administrator on 2016/8/30 0030.
  */
 public class SettingItemView extends RelativeLayout {
-    private static final String NAMESPACE = "http://schemas.android.com/apk/res-auto";
-    private TextView mTvTitle;
-    private TextView mTvDes;
+    private static final String NAMESPACE = "http://schemas.android.com/apk/res-auto";//自定义属性的命名空间
+    private TextView mTvTitle;//标题
+    private TextView mTvDes;//描述
     private CheckBox mCb;
 
-    private String mDesTitle;
+    private String mDesTitle;//自定义属性的标题
     private String mDesOff;
     private String mDesOn;
 
@@ -38,7 +38,7 @@ public class SettingItemView extends RelativeLayout {
         mTvTitle = (TextView) findViewById(R.id.tv_title);
         mTvDes = (TextView) findViewById(R.id.tv_des);
         mCb = (CheckBox) findViewById(R.id.cb);
-
+        //自定义属性
         initAttrs(attrs);
     }
 
@@ -56,8 +56,12 @@ public class SettingItemView extends RelativeLayout {
         return mCb.isChecked();
     }
 
-
+    /**
+     * 设置开关
+     * @param isCheck
+     */
     public void setCheck(boolean isCheck) {
+        //得到开关的状态
         mCb.setChecked(isCheck);
         if(isCheck) {
             mTvDes.setText(mDesOn);
