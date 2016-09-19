@@ -102,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(confirmPwd)) {
                     String savePwd = SpUtil.getString(mContext, ConstentValue.SET_PWD, "");
                     if(savePwd.equals(Md5Util.encoder(confirmPwd))) {
-                        Intent intent = new Intent(mContext, TextActivity.class);
+                        Intent intent = new Intent(mContext, SetOverActivity.class);
                         startActivity(intent);
                         dialog.dismiss();
                     } else {
@@ -144,7 +144,7 @@ public class HomeActivity extends AppCompatActivity {
                     String confirmPwd = mEtConfirmPwd.getText().toString();
                     if(!TextUtils.isEmpty(inputPwd) && !TextUtils.isEmpty(confirmPwd)) {
                         if(inputPwd.equals(confirmPwd)) {
-                            Intent intent = new Intent(mContext, TextActivity.class);
+                            Intent intent = new Intent(mContext, SetOverActivity.class);
                             startActivity(intent);
                             dialog.dismiss();
 

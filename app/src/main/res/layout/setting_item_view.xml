@@ -5,10 +5,6 @@
                 android:orientation="vertical"
                 >
 
-    <TextView
-        android:text="@string/setting"
-        style="@style/TitleStyle"
-        />
 
     <RelativeLayout
         android:layout_width="match_parent"

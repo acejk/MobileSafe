@@ -40,6 +40,7 @@ public class SettingItemView extends RelativeLayout {
         mCb = (CheckBox) findViewById(R.id.cb);
         //自定义属性
         initAttrs(attrs);
+        mTvTitle.setText(mDesTitle);
     }
 
     private void initAttrs(AttributeSet attrs) {

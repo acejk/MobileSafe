@@ -72,4 +72,12 @@ public class SpUtil {
     }
 
 
+    public static void remove(Context context, String key) {
+        if(mSp == null) {
+            mSp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        }
+        mEditor = mSp.edit();
+        mEditor.remove(key);
+        mEditor.commit();
+    }
 }
