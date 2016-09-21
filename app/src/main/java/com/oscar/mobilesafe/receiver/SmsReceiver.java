@@ -52,6 +52,7 @@ public class SmsReceiver extends BroadcastReceiver {
                         mDpm.lockNow();
                     } else {
                         Toast.makeText(context, "请先激活", Toast.LENGTH_SHORT).show();
+
                     }
                 }
 

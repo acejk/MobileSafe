@@ -104,7 +104,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GPS追踪"
+        android:text="GPS追踪 #*location*#"
         android:drawableLeft="@android:drawable/star_big_on"
         android:gravity="center_vertical"
         android:textSize="18sp"
@@ -115,7 +115,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="播放报警音乐"
+        android:text="播放报警音乐#*alarm*#"
         android:drawableLeft="@android:drawable/star_big_on"
         android:gravity="center_vertical"
         android:textSize="18sp"
@@ -125,7 +125,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="远程删除数据"
+        android:text="远程删除数据 #*wipeData*#"
         android:drawableLeft="@android:drawable/star_big_on"
         android:gravity="center_vertical"
         android:textSize="18sp"
@@ -135,7 +135,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="远程锁屏"
+        android:text="远程锁屏 #*lock*#"
         android:drawableLeft="@android:drawable/star_big_on"
         android:gravity="center_vertical"
         android:textSize="18sp"
