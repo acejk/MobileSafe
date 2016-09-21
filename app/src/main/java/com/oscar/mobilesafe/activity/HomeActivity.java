@@ -70,6 +70,10 @@ public class HomeActivity extends AppCompatActivity {
                             showConfirmPwdDialog();
                         }
                         break;
+                    case 7:
+                        Intent intentATool = new Intent(mContext, AToolActivity.class);
+                        startActivity(intentATool);
+                        break;
                     case 8:
                         Intent intent = new Intent(mContext, SettingActivity.class);
                         startActivity(intent);

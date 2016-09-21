@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="btnColorPress">#24ca32</color>
     <color name="btnColor">#40ffb3</color>
+    <color name="queryAddressItemPress">#00c8ff</color>
+    <color name="queryAddressItem">#00ffd4</color>
+
 </resources>
