@@ -38,11 +38,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class SplashActivity extends AppCompatActivity {
-    private static final int UPDATE_VERSION = 100;
-    private static final int ENTER_HOME = 101;
-    private static final int URL_ERROR = 102;
-    private static final int IO_ERROR = 103;
-    private static final int JSON_ERROR = 104;
+    private static final int UPDATE_VERSION = 100;//更新版本号
+    private static final int ENTER_HOME = 101;//进入主界面
+    private static final int URL_ERROR = 102;//url异常
+    private static final int IO_ERROR = 103;//输入输出异常
+    private static final int JSON_ERROR = 104;//json异常
 
 
     private TextView mTvVersion;
@@ -50,10 +50,10 @@ public class SplashActivity extends AppCompatActivity {
 
     private Context mContext;
 
-    private int mLocalVersionCode;
+    private int mLocalVersionCode;//本地版本号
     private static String TAG = "SplashActivity";
 
-    private String mVersionCode;//版本号
+    private String mVersionCode;//网络版本号
     private String mVersionDes;//版本描述
     private String mDownloadUrl;//更新版本下载地址
 
@@ -96,9 +96,9 @@ public class SplashActivity extends AppCompatActivity {
      */
     private void showUpdateDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setIcon(R.mipmap.ic_launcher);
-        builder.setTitle("版本更新");
-        builder.setMessage(mVersionDes);
+        builder.setIcon(R.mipmap.ic_launcher);//设置对话框图标
+        builder.setTitle("版本更新");//设置标题
+        builder.setMessage(mVersionDes);//设置对话框内容
 
         builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
             @Override
@@ -165,7 +165,7 @@ public class SplashActivity extends AppCompatActivity {
     private void installApk(File file) {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
-		intent.setType("application/vnd.android.package-archive");
+        intent.setType("application/vnd.android.package-archive");
         intent.setDataAndType(Uri.fromFile(file),"application/vnd.android.package-archive");
         startActivityForResult(intent, 0);
     }
@@ -189,8 +189,11 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initAnimation() {
+        //透明动画，由透明到不透明
         AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        //动画持续时长
         alphaAnimation.setDuration(3000);
+        //开启动画
         mRlRoot.startAnimation(alphaAnimation);
 
     }
@@ -230,7 +233,7 @@ public class SplashActivity extends AppCompatActivity {
                     if(conn.getResponseCode() == 200) {
                         InputStream is = conn.getInputStream();
                         String jsonStr = StreamUtils.streamToString(is);
-
+                        //解析json字符串
                         JSONObject jsonObject = new JSONObject(jsonStr);
                         String versionName = jsonObject.getString("versionName");
                         mVersionDes = jsonObject.getString("versionDes");
@@ -294,6 +297,7 @@ public class SplashActivity extends AppCompatActivity {
      * @return
      */
     private String getVersionName() {
+        //获取包管理者对象
         PackageManager pm = getPackageManager();
         try {
             PackageInfo packageInfo = pm.getPackageInfo(getPackageName(), 0);

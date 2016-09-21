@@ -43,9 +43,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        //初始化UI
         initViews();
-
+        //初始化数据
         initDatas();
     }
 
@@ -129,6 +129,7 @@ public class HomeActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             final AlertDialog dialog = builder.create();
             View viewSetDialog = View.inflate(mContext, R.layout.view_set_dialog, null);
+            //设置自定义dialog
             dialog.setView(viewSetDialog);
             dialog.show();
 

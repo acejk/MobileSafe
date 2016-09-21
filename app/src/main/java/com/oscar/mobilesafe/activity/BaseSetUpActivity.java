@@ -7,6 +7,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.oscar.mobilesafe.R;
+
 public abstract class BaseSetUpActivity extends AppCompatActivity {
     private GestureDetector mGestureDetector;
 
@@ -15,7 +17,7 @@ public abstract class BaseSetUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_base_set_up);
         mContext = this;
 
         getGesture();
