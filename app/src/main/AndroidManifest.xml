@@ -18,6 +18,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- //获取准确GPS坐标的权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 窗体修改权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
 
     <!-- //获取粗略坐标的权限(网络定位时使用) -->
     <application
@@ -47,6 +50,14 @@
         </activity>
         <activity android:name=".activity.SetUp4Activity">
         </activity>
+        <activity android:name=".activity.AToolActivity">
+        </activity>
+        <activity android:name=".activity.QueryAddressActivity">
+        </activity>
+        <activity android:name=".activity.ToastLocationActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            >
+        </activity>
 
         <!-- 发送报警短信 -->
         <receiver android:name=".receiver.BootReceiver">
@@ -75,11 +86,10 @@
 
         <!-- 位置信息 -->
         <service android:name=".service.LocationService"/>
+        <!-- 电话归属地 -->
+        <service android:name=".service.AddressService"/>
 
-        <activity android:name=".activity.AToolActivity">
-        </activity>
-        <activity android:name=".activity.QueryAddressActivity">
-        </activity>
+
     </application>
 
 </manifest>

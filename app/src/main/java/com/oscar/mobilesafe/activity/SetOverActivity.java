@@ -28,7 +28,6 @@ public class SetOverActivity extends AppCompatActivity {
             //设置完成
             setContentView(R.layout.activity_set_over);
 
-
             initViews();
 
             initDatas();

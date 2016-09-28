@@ -16,4 +16,10 @@ public class ConstentValue {
     public static final String CONTACT_PHONE = "contact_phone";
     //是否开启手机防盗
     public static final String OPEN_SECRITY = "open_secrity";
+    //吐司样式
+    public static final String Toast_Style = "toast_style";
+    //吐司左边缘
+    public static final String LOCATION_X = "location_x";
+    //吐司上边缘
+    public static final String LOCATION_Y = "location_y";
 }

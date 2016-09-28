@@ -12,6 +12,7 @@ public class SetUp1Activity extends BaseSetUpActivity {
     private Button mBtnNext;
     private Context mContext;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

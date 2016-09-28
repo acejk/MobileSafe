@@ -10,13 +10,41 @@
 
 
     <com.oscar.mobilesafe.view.SettingItemView
-        android:id="@+id/setting"
+        android:id="@+id/siv_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         oscar:destitle="自动更新设置"
         oscar:deson="自动更新已开启"
         oscar:desoff="自动更新已关闭"
         >
     </com.oscar.mobilesafe.view.SettingItemView>
+
+    <com.oscar.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        oscar:destitle="电话归属地的显示设置"
+        oscar:deson="归属地的显示已开启"
+        oscar:desoff="归属地的显示已关闭"
+        >
+    </com.oscar.mobilesafe.view.SettingItemView>
+
+    <com.oscar.mobilesafe.view.SettingClickView
+        android:id="@+id/scv_toast_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        >
+    </com.oscar.mobilesafe.view.SettingClickView>
+
+    <com.oscar.mobilesafe.view.SettingClickView
+        android:id="@+id/scv_toast_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        >
+    </com.oscar.mobilesafe.view.SettingClickView>
 
 </LinearLayout>

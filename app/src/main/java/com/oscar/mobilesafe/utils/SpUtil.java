@@ -80,4 +80,32 @@ public class SpUtil {
         mEditor.remove(key);
         mEditor.commit();
     }
+
+    /**
+     * 来电归属地吐司样式
+     * @param context
+     * @param key
+     * @param value
+     */
+    public static void putInt(Context context, String key, int value) {
+        if(mSp == null) {
+            mSp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        }
+        mEditor = mSp.edit();
+        mEditor.putInt(key, value);
+        mEditor.commit();
+    }
+
+    /**
+     * 来电归属地吐司样式
+     * @param context
+     * @param key
+     * @param defValue
+     */
+    public static int getInt(Context context, String key, int defValue) {
+        if(mSp == null) {
+            mSp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        }
+        return mSp.getInt(key, defValue);
+    }
 }

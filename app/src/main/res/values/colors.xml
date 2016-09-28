@@ -7,5 +7,9 @@
     <color name="btnColor">#40ffb3</color>
     <color name="queryAddressItemPress">#00c8ff</color>
     <color name="queryAddressItem">#00ffd4</color>
+    <color name="address_toast_grey">#aea8aa</color>
+    <color name="address_toast_orange">#b6a829</color>
+    <color name="address_toast_blue">#0037ff</color>
+    <color name="address_toast_green">#0dff00</color>
 
 </resources>

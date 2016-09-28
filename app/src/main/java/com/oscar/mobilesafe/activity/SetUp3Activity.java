@@ -25,6 +25,7 @@ public class SetUp3Activity extends BaseSetUpActivity {
 
     private String mContactNumber;//联系人电话号码
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
