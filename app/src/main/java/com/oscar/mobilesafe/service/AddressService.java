@@ -139,6 +139,8 @@ public class AddressService extends Service {
                         params.x = params.x + offsetX;
                         params.y = params.y + offsetY;
 
+
+
                         //容错处理
                         if(params.x < 0) {
                             params.x = 0;
