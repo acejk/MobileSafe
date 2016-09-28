@@ -36,7 +36,6 @@ public class AddressService extends Service {
     private View mViewToast;//自定义吐司
     private TextView mTvToast;//吐司显示的文本
 
-
     private final WindowManager.LayoutParams mParams = new WindowManager.LayoutParams();//窗体布局
 
     private WindowManager mWindowManager;//窗体管理者
