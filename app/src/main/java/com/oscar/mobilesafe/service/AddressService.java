@@ -46,7 +46,7 @@ public class AddressService extends Service {
 
     private String mAddress;//电话号码归属地
 
-    private int[] mToastStyles;
+    private int[] mToastStyles;//吐司样式
 
     /**
      * 消息机制，通知吐司更新归属地信息
