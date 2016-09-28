@@ -97,8 +97,6 @@ public class AddressService extends Service {
         }
     }
 
-
-
     /**
      * 显示来电吐司
      * @param incomingNumber
