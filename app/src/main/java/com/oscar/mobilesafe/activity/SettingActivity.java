@@ -4,16 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.oscar.mobilesafe.R;
 import com.oscar.mobilesafe.service.AddressService;
+import com.oscar.mobilesafe.service.BlackNumService;
 import com.oscar.mobilesafe.utils.ConstentValue;
 import com.oscar.mobilesafe.utils.ServiceUtil;
 import com.oscar.mobilesafe.utils.SpUtil;
@@ -23,6 +21,7 @@ import com.oscar.mobilesafe.view.SettingItemView;
 public class SettingActivity extends AppCompatActivity {
     private SettingItemView mSivUpdate;
     private SettingItemView mSivAddress;
+    private SettingItemView mSivBlackNum;
 
     private SettingClickView mScvToastStyle;
     private SettingClickView mScvToastLocation;
@@ -47,15 +46,39 @@ public class SettingActivity extends AppCompatActivity {
         initUpdate();
         //是否开启电话归属地
         initAddress();
-        if (! Settings.canDrawOverlays(mContext)) {
+        /*if (! Settings.canDrawOverlays(mContext)) {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                     Uri.parse("package:" + getPackageName()));
             startActivityForResult(intent,10);
-        }
+        }*/
         //来电吐司样式
         initToastStyle();
         //吐司的位置
         initToastLocation();
+        //黑名单拦截
+        initBlackNum();
+    }
+
+    /**
+     * 黑名单拦截
+     */
+    private void initBlackNum() {
+        boolean isRunning = ServiceUtil.isRunning(mContext, "com.oscar.mobilesafe.service.BlackNumService");
+        mSivBlackNum.setCheck(isRunning);
+        mSivBlackNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isCheck = mSivBlackNum.isCheck();
+                mSivBlackNum.setCheck(!isCheck);
+                if(!isCheck) {
+                    //开启服务
+                    startService(new Intent(mContext, BlackNumService.class));
+                } else {
+                    //停止服务
+                    stopService(new Intent(mContext, BlackNumService.class));
+                }
+            }
+        });
     }
 
     /**
@@ -155,9 +178,10 @@ public class SettingActivity extends AppCompatActivity {
         mSivAddress = (SettingItemView) findViewById(R.id.siv_address);
         mScvToastStyle = (SettingClickView) findViewById(R.id.scv_toast_style);
         mScvToastLocation = (SettingClickView) findViewById(R.id.scv_toast_location);
+        mSivBlackNum = (SettingItemView) findViewById(R.id.siv_blacknum);
     }
 
-    @SuppressLint("NewApi")
+    /*@SuppressLint("NewApi")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 10) {
@@ -166,5 +190,5 @@ public class SettingActivity extends AppCompatActivity {
                 Toast.makeText(mContext,"not granted",Toast.LENGTH_SHORT);
             }
         }
-    }
+    }*/
 }

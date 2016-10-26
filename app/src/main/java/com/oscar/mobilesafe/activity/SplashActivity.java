@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -189,14 +190,40 @@ public class SplashActivity extends AppCompatActivity {
         initAnimation();
         //初始化数据库
         initDB();
+        if(!SpUtil.getBoolean(this, ConstentValue.HAS_SHORTCUT, false)) {
+            //创建桌面快捷方式
+            initShortCut();
+        }
+
+
+    }
+    //创建桌面快捷方式
+    private void initShortCut() {
+        Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "手机安全卫士");
+
+        Intent intentShutCut = new Intent("android.intent.action.Home");
+        intentShutCut.addCategory("android.intent.category.DEFAULT");
+
+        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intentShutCut);
+
+        sendBroadcast(intent);
+
+        SpUtil.putBoolean(this, ConstentValue.HAS_SHORTCUT, true);
     }
 
     private void initDB() {
-        initAddressDB("address.db");
+        //初始化归属地数据库
+        initDBToFiles("address.db");
+        //初始化常用号码数据库
+        initDBToFiles("commonnum.db");
+        //初始化病毒数据库
+        initDBToFiles("antivirus.db");
     }
 
-    //初始化归属地数据库
-    private void initAddressDB(String dbName) {
+    //初始化常用号码数据库
+    private void initDBToFiles(String dbName) {
         InputStream is = null;
         FileOutputStream fos = null;
         try {
@@ -227,6 +254,9 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
 
     private void initAnimation() {
         //透明动画，由透明到不透明

@@ -70,6 +70,22 @@ public class HomeActivity extends AppCompatActivity {
                             showConfirmPwdDialog();
                         }
                         break;
+                    case 1:
+                        Intent blackNumIntent = new Intent(mContext, BlackNumActivity.class);
+                        startActivity(blackNumIntent);
+                        break;
+                    case 2:
+                        Intent appManager = new Intent(mContext, AppManagerActivity.class);
+                        startActivity(appManager);
+                        break;
+                    case 3:
+                        Intent processIntent = new Intent(mContext, ProcessManagerActivity.class);
+                        startActivity(processIntent);
+                        break;
+                    case 5:
+                        Intent anitVirusIntent = new Intent(mContext, AnitVirusActivity.class);
+                        startActivity(anitVirusIntent);
+                        break;
                     case 7:
                         Intent intentATool = new Intent(mContext, AToolActivity.class);
                         startActivity(intentATool);

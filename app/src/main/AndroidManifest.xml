@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.oscar.mobilesafe">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -21,8 +22,15 @@
     <!-- 窗体修改权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+    <!-- 电话打出权限 -->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+    <!-- 读短信权限 -->
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <!-- 杀死进程 -->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <!-- 安装快捷方式权限 -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
 
-    <!-- //获取粗略坐标的权限(网络定位时使用) -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/home_safe"
@@ -37,6 +45,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.Home"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
         <activity android:name=".activity.SettingActivity">
         </activity>
@@ -54,9 +67,9 @@
         </activity>
         <activity android:name=".activity.QueryAddressActivity">
         </activity>
-        <activity android:name=".activity.ToastLocationActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            >
+        <activity
+            android:name=".activity.ToastLocationActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
 
         <!-- 发送报警短信 -->
@@ -69,6 +82,24 @@
             <intent-filter>
                 <action android:name="android.provder.Telephony.SMS_RECEIVED"/>
             </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.MyAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/process_widget_provider"/>
+        </receiver>
+        <receiver android:name=".receiver.KillProcessReceiver">
+            <intent-filter>
+                <action android:name="com.oscar.action.KillProcess"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/process_widget_provider"/>
         </receiver>
         <receiver
             android:name=".receiver.DeviceAdmin"
@@ -88,8 +119,33 @@
         <service android:name=".service.LocationService"/>
         <!-- 电话归属地 -->
         <service android:name=".service.AddressService"/>
+        <!-- 黑名单拦截 -->
+        <service android:name=".service.BlackNumService"/>
+        <!-- 窗口小部件更新 -->
+        <service android:name=".service.UpdateWidgetService"/>
 
+        <activity android:name=".activity.BlackNumActivity">
+        </activity>
+        <activity android:name=".activity.AppManagerActivity">
+        </activity>
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
 
+        <activity android:name=".activity.ProcessManagerActivity">
+        </activity>
+        <activity android:name=".activity.ProcessSetting">
+        </activity>
+        <activity android:name=".activity.CommonQueryActivity">
+        </activity>
+        <activity android:name=".activity.AppLockActivity">
+        </activity>
+        <activity android:name=".activity.AnitVirusActivity">
+        </activity>
     </application>
 
 </manifest>

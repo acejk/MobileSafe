@@ -22,4 +22,8 @@ public class ConstentValue {
     public static final String LOCATION_X = "location_x";
     //吐司上边缘
     public static final String LOCATION_Y = "location_y";
+    //是否显示系统进程
+    public static final String SHOW_SYSTEM_PROCESS = "show_system_process";
+    //是否有快捷方式
+    public static final String HAS_SHORTCUT = "has_shortcut";
 }

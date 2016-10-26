@@ -1,8 +1,10 @@
 package com.oscar.mobilesafe.service;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
@@ -47,6 +49,8 @@ public class AddressService extends Service {
 
     private int[] mToastStyles;//吐司样式
 
+    private InnerOutCallReceiver mInnerOutCallReceiver;
+
     /**
      * 消息机制，通知吐司更新归属地信息
      */
@@ -70,8 +74,19 @@ public class AddressService extends Service {
         mPhoneStateListener = new MyPhoneStateListenter();
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
+        mInnerOutCallReceiver = new InnerOutCallReceiver();
+        registerReceiver(mInnerOutCallReceiver, filter);
 
+    }
 
+    class InnerOutCallReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String phone = getResultData();
+            showToast(phone);
+        }
     }
 
     class MyPhoneStateListenter extends PhoneStateListener {
@@ -218,6 +233,10 @@ public class AddressService extends Service {
         super.onDestroy();
         if(mTelephonyManager != null && mPhoneStateListener != null) {
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        }
+
+        if(mInnerOutCallReceiver != null) {
+            unregisterReceiver(mInnerOutCallReceiver);
         }
     }
 

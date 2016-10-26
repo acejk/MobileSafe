@@ -47,4 +47,15 @@
         >
     </com.oscar.mobilesafe.view.SettingClickView>
 
+    <com.oscar.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_blacknum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        oscar:destitle="黑名单拦截设置"
+        oscar:deson="黑名单拦截已开启"
+        oscar:desoff="黑名单拦截已关闭"
+        >
+    </com.oscar.mobilesafe.view.SettingItemView>
+
 </LinearLayout>
